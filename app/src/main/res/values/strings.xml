@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">DomesticGod</string>
+    <string name="app_name">Domestic God</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="url_key">url</string>
+    <string name="image_src_key">image_source</string>
+    <string name="position_key">position</string>
 </resources>
