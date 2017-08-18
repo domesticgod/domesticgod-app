@@ -3,16 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="uk.co.domesticgod.domesticgod.ResultsFragment">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_results_error"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:textSize="24dp"
+        android:textColor="@color/colorPrimaryText"/>
     <ProgressBar
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:id="@+id/progresbar_results"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center_horizontal|center_vertical"/>
+
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/posts_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/posts_recyclerview"
-        />
+        android:background="@color/colorDivider" />
 
 
 </FrameLayout>

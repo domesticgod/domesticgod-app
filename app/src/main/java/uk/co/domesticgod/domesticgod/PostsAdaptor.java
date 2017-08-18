@@ -32,8 +32,13 @@ public class PostsAdaptor extends RecyclerView.Adapter<PostsAdaptor.PostsViewHol
 
     public void setData(String data){
         mData=data;
-        mPosts = DataUtils.parseJSONtoPosts(data);
-        notifyDataSetChanged();
+        if(mData!=null) {
+            mPosts = DataUtils.parseJSONtoPosts(data);
+            notifyDataSetChanged();
+        }else{
+
+
+        }
     }
 
     @Override

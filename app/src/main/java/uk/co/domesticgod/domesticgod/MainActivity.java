@@ -17,7 +17,7 @@ import android.widget.TextView;
 import uk.co.domesticgod.domesticgod.data.Post;
 import uk.co.domesticgod.domesticgod.data.PostsAsyncLoader;
 
-public class MainActivity extends Activity implements
+public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<String>,
 ResultsFragment.OnFragmentInteractionListener{
     private static final String TAG = "MainActivity";
@@ -29,10 +29,12 @@ ResultsFragment.OnFragmentInteractionListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mResultsFragment=(ResultsFragment)getFragmentManager().findFragmentById(R.id.fragment_resulst_view);
+        mResultsFragment=(ResultsFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_resulst_view);
         getLoaderManager().initLoader(POST_LOADER,null,this);
 
     }
+
+
 
     @Override
     public Loader<String> onCreateLoader(int id, Bundle args) {

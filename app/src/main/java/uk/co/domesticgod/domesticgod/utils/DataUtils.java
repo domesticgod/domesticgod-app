@@ -1,5 +1,6 @@
 package uk.co.domesticgod.domesticgod.utils;
 
+import android.os.Build;
 import android.text.Html;
 import android.util.Log;
 
@@ -18,16 +19,21 @@ public class DataUtils {
     public static Post[] parseJSONtoPosts(String json){
         Post[] posts = null;
         try {
+            if(json==null)return new Post[0];
             JSONArray allData = new JSONArray(json);
             int numPosts = allData.length();
             posts=new Post[numPosts];
 
             for (int i=0;i<allData.length();i++){
                 String title = allData.getJSONObject(i).getJSONObject("title").getString("rendered");
-                title = Html.fromHtml(title, 0).toString();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    title = Html.fromHtml(title, 0).toString();
+                }
 
                 String urlStr = allData.getJSONObject(i).getString("link");
-                urlStr = Html.fromHtml(urlStr, 0).toString();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    urlStr = Html.fromHtml(urlStr, 0).toString();
+                }
                 String content = allData.getJSONObject(i).getJSONObject("content").getString("rendered");
 
                 JSONObject featuredMedia = allData.getJSONObject(i).getJSONObject("_embedded").getJSONArray("wp:featuredmedia").getJSONObject(0);

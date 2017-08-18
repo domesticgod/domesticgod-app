@@ -43,6 +43,7 @@ public class PostsAsyncLoader extends AsyncTaskLoader<String> {
         try {
             mDataStr = NetworkUtils.getResponseFromHttpUrl(postsUrl);
         } catch (IOException e) {
+            mDataStr=null;
             e.printStackTrace();
         }
         Log.v(TAG,"Got response:"+mDataStr);

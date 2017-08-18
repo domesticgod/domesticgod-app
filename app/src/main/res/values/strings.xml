@@ -6,4 +6,6 @@
     <string name="url_key">url</string>
     <string name="image_src_key">image_source</string>
     <string name="position_key">position</string>
+    <string name="err_no_internet">Ooops, looks like you are offline. Try again later</string>
+    <string name="no_results">Sorry there are no results</string>
 </resources>

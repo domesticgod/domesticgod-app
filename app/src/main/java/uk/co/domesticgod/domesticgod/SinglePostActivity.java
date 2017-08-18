@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-public class SinglePostActivity extends Activity {
+public class SinglePostActivity extends AppCompatActivity {
     static final String URL_KEY="URL";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
