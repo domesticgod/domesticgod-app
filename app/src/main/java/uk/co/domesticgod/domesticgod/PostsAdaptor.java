@@ -52,11 +52,12 @@ public class PostsAdaptor extends RecyclerView.Adapter<PostsAdaptor.PostsViewHol
     @Override
     public void onBindViewHolder(PostsViewHolder holder, int position) {
         holder.setTitle(mPosts[position].getTitle());
-        //holder.itemView.setTag(mPosts[position].getAddress());
-        Glide.with(holder.itemView.getContext())
-                .load(mPosts[position].getFeaturedImageAddress())
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.mImageView);
+        if(mPosts[position].getFeaturedImageAddress()!=null) {
+            Glide.with(holder.itemView.getContext())
+                    .load(mPosts[position].getFeaturedImageAddress())
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(holder.mImageView);
+        }
 
         holder.itemView.setTag(R.string.position_key,position);
         holder.itemView.setOnClickListener(mListener);

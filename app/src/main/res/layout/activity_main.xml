@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Inverse"
-            app:contentScrim="@color/colorPrimary"
+            app:contentScrim="@color/colorAccent"
             app:expandedTitleTextAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="true">
@@ -32,7 +32,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="96dp"
+                android:layout_height="44dp"
                 android:subtitle="test"
                 app:layout_collapseMode="pin"
                 app:title="Posts"
@@ -56,5 +56,17 @@
             tools:layout="@layout/fragment_results" />
     </android.support.v4.widget.NestedScrollView>
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:elevation="8dp"
+        android:src="@drawable/ic_camera_enhance_black_36dp"
+        app:elevation="8dp"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_camera_enhance_black_36dp"
+        android:clickable="true"
+        app:pressedTranslationZ="12dp" />
 </android.support.design.widget.CoordinatorLayout>

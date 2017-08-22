@@ -18,14 +18,17 @@ public class DataUtils {
 
     public static Post[] parseJSONtoPosts(String json){
         Post[] posts = null;
+        JSONArray allData;
         try {
             if(json==null)return new Post[0];
-            JSONArray allData = new JSONArray(json);
+            allData = new JSONArray(json);
             int numPosts = allData.length();
             posts=new Post[numPosts];
 
             for (int i=0;i<allData.length();i++){
-                String title = allData.getJSONObject(i).getJSONObject("title").getString("rendered");
+                JSONObject postJson =allData.getJSONObject(i);
+
+                String title = postJson.getJSONObject("title").getString("rendered");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     title = Html.fromHtml(title, 0).toString();
                 }
@@ -34,10 +37,17 @@ public class DataUtils {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     urlStr = Html.fromHtml(urlStr, 0).toString();
                 }
-                String content = allData.getJSONObject(i).getJSONObject("content").getString("rendered");
+                String content = postJson.getJSONObject("content").getString("rendered");
 
-                JSONObject featuredMedia = allData.getJSONObject(i).getJSONObject("_embedded").getJSONArray("wp:featuredmedia").getJSONObject(0);
-                String mediumAddress = featuredMedia.getJSONObject("media_details").getJSONObject("sizes").getJSONObject("medium").getString("source_url");
+                String mediumAddress = null;
+                try {
+                    JSONObject embeddedJson = postJson.getJSONObject("_embedded");
+                    JSONObject featuredMedia = embeddedJson.getJSONArray("wp:featuredmedia").getJSONObject(0);
+                    mediumAddress = featuredMedia.getJSONObject("media_details").getJSONObject("sizes").getJSONObject("medium").getString("source_url");
+                } catch (JSONException e) {
+                    mediumAddress=null;
+                }
+
                 Log.i("Found post with title="+title+"\nLink="+urlStr,content+"\n Image URL="+mediumAddress);
                 posts[i]=new Post(title,urlStr,content,mediumAddress);
 

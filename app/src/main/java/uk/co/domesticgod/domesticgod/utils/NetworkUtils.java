@@ -1,6 +1,7 @@
 package uk.co.domesticgod.domesticgod.utils;
 
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,11 +17,21 @@ import java.util.Scanner;
 public class NetworkUtils {
     final static String DG_BASE_URL = "http://www.domesticgod.co.uk";
     final static Uri DG_BASE_URI = Uri.parse(DG_BASE_URL);
-    final static String DG_POSTS_PATH = "wp-json/wp/v2/posts?_embed";
+    final static String DG_POSTS_PATH = "wp-json/wp/v2/posts";
+    final static String TAG = "NetworkUtils";
 
-    public static URL buildUrl(){
+    public static URL buildUrl(String query){
         Uri builtUri = DG_BASE_URI.buildUpon()
                 .appendEncodedPath(DG_POSTS_PATH)
+                .build();
+        if(query!=null){
+            Log.v(TAG,"Generating url to retrieve posts query="+query);
+            builtUri=builtUri.buildUpon()
+                    .appendQueryParameter("search",query)
+                    .build();
+        }
+        builtUri=builtUri.buildUpon()
+                .appendQueryParameter("_embed","true")
                 .build();
         URL url = null;
         try {

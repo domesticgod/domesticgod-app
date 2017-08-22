@@ -12,8 +12,6 @@
     <style name="ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/colorPrimary</item>
         <item name="background">@color/colorPrimary</item>
-        <!--<item name="android:elevation">96dp</item>-->
-        <!--<item name="elevation">96dp</item>-->
     </style>
 
 </resources>

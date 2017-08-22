@@ -1,20 +1,20 @@
 package uk.co.domesticgod.domesticgod;
 
-import android.app.Activity;
-import android.app.Fragment;
+
 import android.app.LoaderManager;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
-import android.widget.TextView;
+import android.view.MenuItem;
+
 
 import uk.co.domesticgod.domesticgod.data.Post;
 import uk.co.domesticgod.domesticgod.data.PostsAsyncLoader;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements
 ResultsFragment.OnFragmentInteractionListener{
     private static final String TAG = "MainActivity";
     final static int POST_LOADER = 1;
-
+    String mQuery=null;
     private ResultsFragment mResultsFragment;
 
     @Override
@@ -32,8 +32,20 @@ ResultsFragment.OnFragmentInteractionListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mResultsFragment=(ResultsFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_resulst_view);
+        Intent intent = getIntent();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            mQuery = intent.getStringExtra(SearchManager.QUERY);
+        }
         getLoaderManager().initLoader(POST_LOADER,null,this);
 
+    }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            mQuery = intent.getStringExtra(SearchManager.QUERY);
+        }
+        mResultsFragment.setData(null);
+        getLoaderManager().restartLoader(POST_LOADER,null,this);
     }
 
 
@@ -41,7 +53,7 @@ ResultsFragment.OnFragmentInteractionListener{
     @Override
     public Loader<String> onCreateLoader(int id, Bundle args) {
         Log.i(TAG,"Initialising Async Loader");
-        return new PostsAsyncLoader(this);
+        return new PostsAsyncLoader(this,mQuery);
     }
 
     @Override
@@ -66,6 +78,14 @@ ResultsFragment.OnFragmentInteractionListener{
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        MenuItem menuitem = menu.findItem(R.id.searchview);
+        SearchView searchView = (SearchView) menuitem.getActionView();
+        SearchableInfo searchableInfo = searchManager.getSearchableInfo(getComponentName());
+        searchView.setSearchableInfo(searchableInfo);
 
         return true;
     }

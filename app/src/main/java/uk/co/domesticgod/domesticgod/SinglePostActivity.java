@@ -18,8 +18,10 @@ public class SinglePostActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String imageUrl = intent.getStringExtra(getString(R.string.image_src_key));
         ImageView iv = (ImageView)findViewById(R.id.iv_toolbar_image);
-        Glide.with(this).load(imageUrl)
-                .into(iv);
+        if(imageUrl!=null) {
+            Glide.with(this).load(imageUrl)
+                    .into(iv);
+        }
 
 
     }
