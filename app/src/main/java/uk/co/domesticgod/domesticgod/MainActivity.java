@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -59,5 +61,12 @@ ResultsFragment.OnFragmentInteractionListener{
         intent.putExtra(getString(R.string.url_key),post.getContent());
         intent.putExtra(getString(R.string.image_src_key),post.getFeaturedImageAddress());
         startActivity(intent);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options, menu);
+
+        return true;
     }
 }
