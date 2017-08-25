@@ -3,8 +3,13 @@ package uk.co.domesticgod.domesticgod.utils;
 import android.net.Uri;
 import android.util.Log;
 
+import org.apache.http.entity.StringEntity;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -68,4 +73,33 @@ public class NetworkUtils {
             urlConnection.disconnect();
         }
     }
+
+    public static String getResponseFromHttpUrlPOST(URL url,byte[] data) throws IOException {
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        try {
+            urlConnection.setDoOutput(true);
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Ocp-Apim-Subscription-Key", "7bea0d8ba6ca4912bcc637e789e93e03");
+            urlConnection.setChunkedStreamingMode(0);
+
+            OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
+            //data.writeTo(out);
+            out.write(data);
+            out.flush();
+            out.close();
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
+    }
+
 }

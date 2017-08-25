@@ -10,4 +10,6 @@
     <string name="no_results">Sorry there are no results</string>
     <string name="search_title">Search</string>
     <string name="search_hint">search</string>
+    <string name="microsoft_subscription_key">7bea0d8ba6ca4912bcc637e789e93e03</string>
+    <string name="microsoft_base_url">https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/</string>
 </resources>

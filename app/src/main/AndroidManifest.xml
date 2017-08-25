@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uk.co.domesticgod.domesticgod">
-
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -23,6 +24,15 @@
         </activity>
         <activity android:name=".SinglePostActivity"
             android:parentActivityName=".MainActivity"/>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="uk.co.domesticgod.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/files"></meta-data>
+        </provider>
     </application>
 
 </manifest>

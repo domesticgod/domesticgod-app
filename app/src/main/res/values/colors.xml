@@ -9,4 +9,5 @@
     <color name="colorIcons">#212121</color>
     <color name="colorDivider">#7fbdbdbd</color>
     <color name="colorLightText">#ffffff</color>
+    <color name="colorGreyOut">#d6bdbdbd</color>
 </resources>
